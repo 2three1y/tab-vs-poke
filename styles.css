@@ -1,0 +1,34 @@
+:root{color-scheme:light dark;--bg:#fff;--fg:#111;--muted:#555;--poke:#e9e9eb;--poke-fg:#111;--tab:#0a5fd1;--tab-fg:#fff;--line:#c8c8cc;--focus:#0a5fd1;--accent:#0a5fd1}
+@media (prefers-color-scheme:dark){:root{--bg:#000;--fg:#f2f2f7;--muted:#b0b0b8;--poke:#2c2c2e;--poke-fg:#f2f2f7;--tab:#1a6be0;--tab-fg:#fff;--line:#48484a;--focus:#7fb2ff;--accent:#7fb2ff}}
+*{box-sizing:border-box}
+html{font:-apple-system-body;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body{margin:0;background:var(--bg);color:var(--fg);line-height:1.5;font-size:1.0625rem}
+header,main,footer{max-width:42rem;margin:0 auto;padding:0 1rem}
+header{padding-top:1.5rem}
+#master{margin-top:1rem}
+h1{font-size:2rem;margin:.5rem 0}
+h2{font-size:1.4rem;margin:2rem 0 .5rem}
+h3.date{font-size:1rem;color:var(--muted);text-align:center;margin:1.5rem 0 .5rem;font-weight:600}
+h4.roundh{font-size:1.05rem;margin:1rem 0 .25rem}
+.roundnote,.small{color:var(--muted);font-size:.95rem;margin:.25rem 0 .75rem}
+.score{padding-left:1.5rem}.score li{margin:.25rem 0}
+fieldset{border:1px solid var(--line);border-radius:12px;margin:0 0 .75rem;padding:.5rem .75rem .75rem}
+legend{font-weight:600;padding:0 .25rem}
+label.opt{display:inline-flex;align-items:center;gap:.4rem;min-height:44px;margin-right:1rem}
+input[type=radio]{width:1.2rem;height:1.2rem;accent-color:var(--accent)}
+.row{display:flex;flex-wrap:wrap;gap:.5rem;margin:.25rem 0}
+button{font:inherit;min-height:44px;padding:.4rem .9rem;border-radius:22px;border:1px solid var(--line);background:var(--poke);color:var(--fg);cursor:pointer}
+summary{cursor:pointer;min-height:44px;padding:.6rem .9rem;border:1px solid var(--line);border-radius:12px;font-weight:600;list-style-position:inside}
+details[open] summary{margin-bottom:.5rem}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+ol.thread{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.6rem}
+.msg{max-width:85%;padding:.55rem .85rem;border-radius:18px;overflow-wrap:anywhere}
+.msg.poke{align-self:flex-start;background:var(--poke);color:var(--poke-fg);border-bottom-left-radius:6px}
+.msg.tab{align-self:flex-end;background:var(--tab);color:var(--tab-fg);border-bottom-right-radius:6px}
+.who{font-size:.85rem;font-weight:600;opacity:.85}
+.text{white-space:pre-line}
+.grade,.note{font-size:.9rem;font-style:italic}
+.grade{font-weight:600}
+.status{font-weight:600}
+footer{margin-top:3rem;padding-bottom:2rem;border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
+[hidden]{display:none!important}
