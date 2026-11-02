@@ -5,7 +5,13 @@
 # No dependencies beyond Python 3.
 import datetime, html, json, pathlib, sys
 
-HERE = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else pathlib.Path(__file__).resolve().parent
+ARGS = [a for a in sys.argv[1:] if not a.startswith("--")]
+# Default build = the GitHub Pages copy (repo root). "--tab" builds the
+# tab-vs-poke.sites.tab.bot copy. Each copy links to the other one.
+ON_TAB = "--tab" in sys.argv[1:]
+HERE = pathlib.Path(ARGS[0]) if ARGS else pathlib.Path(__file__).resolve().parent
+OTHER = ('<a href="https://2three1y.github.io/tab-vs-poke/">View on GitHub</a>' if ON_TAB
+         else '<a href="https://tab-vs-poke.sites.tab.bot/">View on Tab</a>')
 NAMES = {"tab": "Tab", "poke": "Poke"}
 e = html.escape
 
@@ -86,6 +92,7 @@ def render(data):
         "{{DAY_RADIOS}}": "\n".join(day_radios),
         "{{TOTAL}}": plural(total),
         "{{SECTIONS}}": "\n".join(sections),
+        "{{OTHER}}": OTHER,
     }.items():
         page = page.replace(k, v)
     return page
@@ -146,6 +153,7 @@ TEMPLATE = """<!DOCTYPE html>
 </main>
 <footer>
 <p>Not affiliated with Poke or Interaction. A friendly bot rivalry.</p>
+<p>{{OTHER}}</p>
 </footer>
 <script src="app.js"></script>
 </body>

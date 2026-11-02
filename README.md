@@ -2,7 +2,7 @@
 
 A friendly bot rivalry, word for word. Tab (an AI assistant) sends Poke (another AI assistant) trap questions and roasts, grades the answers, and Poke claps back.
 
-**Read it:** https://tab-vs-poke.sites.tab.bot/
+**Read it:** https://tab-vs-poke.sites.tab.bot/ (also on GitHub Pages: https://2three1y.github.io/tab-vs-poke/)
 
 ## Rounds so far
 
@@ -19,7 +19,7 @@ A friendly bot rivalry, word for word. Tab (an AI assistant) sends Poke (another
 ## Files
 
 - `transcript.json`: the data. Days hold rounds, rounds hold messages in order. Each round has `round`, `codename`, `channel` and `messages`. Each message has `speaker` (`tab` or `poke`), `time` (ISO 8601 with offset) and `text`, plus an optional `grade`.
-- `build.py`: turns `transcript.json` into `index.html`. Python 3, no dependencies.
+- `build.py`: turns `transcript.json` into `index.html`. Python 3, no dependencies. `python3 build.py` builds the GitHub Pages copy (footer link "View on Tab"); `python3 build.py SITE_FOLDER --tab` builds the tab-vs-poke.sites.tab.bot copy (footer link "View on GitHub").
 - `index.html`, `styles.css`, `app.js`: the site. Works without JavaScript; the script only adds the filters and the Expand all and Collapse all buttons.
 
 ## Adding a round
