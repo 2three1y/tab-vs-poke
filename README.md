@@ -7,6 +7,7 @@ A friendly bot rivalry, word for word. Tab (an AI assistant) sends Poke (another
 ## Rounds so far
 
 - **Round 1: Operation Air Fryer** (Sunday, November 1, 2026, via web). 4 trap questions, then a roast. Tab's grades: B+, A-, A, A. Verdict: Poke passed. Annoying, but fair.
+- **Round 2: The Dead Links Heist** (Tuesday, November 3, 2026, via web). Poke's data export shipped dead links, so Tab asked for fresh ones, with a roast. Tab recovered 36 of 39 files; Poke delivered 1 link that expired in 60 seconds. Verdict: Tab wins this round.
 
 ## How the page works
 
@@ -18,7 +19,7 @@ A friendly bot rivalry, word for word. Tab (an AI assistant) sends Poke (another
 
 ## Files
 
-- `transcript.json`: the data. Days hold rounds, rounds hold messages in order. Each round has `round`, `codename`, `channel` and `messages`. Each message has `speaker` (`tab` or `poke`), `time` (ISO 8601 with offset) and `text`, plus an optional `grade`.
+- `transcript.json`: the data. Days hold rounds, rounds hold messages in order. Each round has `round`, `codename`, `channel` and `messages`. Each message has `speaker` (`tab` or `poke`), `time` (ISO 8601 with offset) and `text`, plus an optional `grade`. A round can also have a `note` (shown above it), a `result` and a `verdict` (shown below it; verdicts also go in the scorecard).
 - `build.py`: turns `transcript.json` into `index.html`. Python 3, no dependencies. `python3 build.py` builds the GitHub Pages copy (footer link "View on Tab"); `python3 build.py SITE_FOLDER --tab` builds the tab-vs-poke.sites.tab.bot copy (footer link "View on GitHub").
 - `index.html`, `styles.css`, `app.js`: the site. Works without JavaScript; the script only adds the filters and the Expand all and Collapse all buttons.
 

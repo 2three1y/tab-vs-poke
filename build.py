@@ -50,8 +50,11 @@ def render(data):
     total = len(allmsgs)
 
     score = []
+    verdicts = []
     for d in days:
         for r in d["rounds"]:
+            if r.get("verdict"):
+                verdicts.append(f'<p>Round {r["round"]} verdict: {e(r["verdict"])}</p>')
             msgs = r["messages"]
             for i, m in enumerate(msgs):
                 if m.get("grade"):
@@ -74,7 +77,12 @@ def render(data):
                 head += f', via {e(r["channel"])}'
             note = f'<p class="roundnote">{e(r["note"])}</p>\n' if r.get("note") else ""
             items = "\n".join(message_li(m) for m in r["messages"])
-            blocks.append(f'<h4 class="roundh">{head}</h4>\n{note}<ol class="thread">\n{items}\n</ol>')
+            after = ""
+            if r.get("result"):
+                after += f'\n<p class="roundresult">{e(r["result"])}</p>'
+            if r.get("verdict"):
+                after += f'\n<p class="roundresult">Tab\u2019s verdict: {e(r["verdict"])}</p>'
+            blocks.append(f'<h4 class="roundh">{head}</h4>\n{note}<ol class="thread">\n{items}\n</ol>{after}')
         hid = f'd-{d["date"]}'
         body = "\n".join(blocks)
         sections.append(
@@ -89,6 +97,7 @@ def render(data):
     page = TEMPLATE
     for k, v in {
         "{{SCORE}}": "\n".join(score),
+        "{{VERDICTS}}": "\n".join(verdicts),
         "{{DAY_RADIOS}}": "\n".join(day_radios),
         "{{TOTAL}}": plural(total),
         "{{SECTIONS}}": "\n".join(sections),
@@ -116,7 +125,7 @@ TEMPLATE = """<!DOCTYPE html>
 <body>
 <header>
 <h1>Tab vs Poke</h1>
-<p>A friendly bot beef. Tab sent Poke 4 trap questions, graded the answers, then sent a roast. Poke clapped back. Everything Tab and Poke said to each other is here, word for word.</p>
+<p>A friendly bot beef. In Round 1, Tab sent Poke 4 trap questions, graded the answers, then sent a roast. Poke clapped back. In Round 2, Poke\u2019s data export shipped dead links, so Tab came to collect. Everything Tab and Poke said to each other is here, word for word.</p>
 </header>
 <main>
 <div class="row" id="master" hidden>
@@ -125,11 +134,11 @@ TEMPLATE = """<!DOCTYPE html>
 </div>
 <section aria-labelledby="score-h">
 <h2 id="score-h">Scorecard</h2>
-<p>Tab\u2019s grades for Poke\u2019s answers:</p>
+<p>Round 1 grades for Poke\u2019s answers:</p>
 <ol class="score">
 {{SCORE}}
 </ol>
-<p>Tab\u2019s verdict: Poke passed. Annoying, but fair.</p>
+{{VERDICTS}}
 </section>
 <section aria-labelledby="filter-h" id="filters" hidden>
 <h2 id="filter-h">Filter</h2>
@@ -147,7 +156,7 @@ TEMPLATE = """<!DOCTYPE html>
 </section>
 <section aria-labelledby="thread-h">
 <h2 id="thread-h">The thread</h2>
-<p class="small">Times are Eastern (Detroit). Poke\u2019s words are copied exactly.</p>
+<p class="small">Times are Eastern (Detroit). Poke\u2019s words are copied exactly. Download links and file IDs are swapped for a label in square brackets.</p>
 {{SECTIONS}}
 </section>
 </main>
